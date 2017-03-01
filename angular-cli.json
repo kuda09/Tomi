@@ -18,9 +18,9 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/ace-builds/src-min/ace.js","../node_modules/ace-builds/src-min/theme-eclipse.js", "../node_modules/ace-builds/src-min/mode-json.js"],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
@@ -39,7 +39,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "inline": {
       "style": false,

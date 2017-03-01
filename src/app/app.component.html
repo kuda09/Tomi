@@ -1,3 +1,57 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-container>
+    <md-sidenav #sidenav class="sidenav" color="primary">
+        <md-nav-list>
+            <a md-list-item (click)="sidenav.close()" [routerLink]="['/']">
+                <md-icon md-list-icon>Home</md-icon>
+                <span md-line>Home</span>
+            </a>
+            <a md-list-item (click)="sidenav.close()" [routerLink]="['/dashboards']">
+                <md-icon md-list-icon>dashboard</md-icon>
+                <span md-line>Dashboards</span>
+            </a>
+            <a md-list-item (click)="sidenav.close()" [routerLink]="['/visualisations/4']">
+                <md-icon md-list-icon>timeline</md-icon>
+                <span md-line>Visualisations</span>
+            </a>
+        </md-nav-list>
+    </md-sidenav>
+
+    <div class="my-content">
+        <md-toolbar color="primary">
+            <button md-icon-button (click)="sidenav.open()">
+                <md-icon>menu</md-icon>
+            </button>
+            <h4>{{title}}</h4>
+
+
+            <form class="filter-form">
+
+                <div class="form-wrapper">
+                    <input type="text" class="form-control" value="*">
+                </div>
+                <button md-icon-button type="submit">
+                    <md-icon>search</md-icon>
+                </button>
+            </form>
+
+
+            <div class="buttons-wrapper">
+                <button md-icon-button>
+                    <md-icon>save</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon>create</md-icon>
+                </button>
+                <button md-icon-button>
+                    <md-icon>timer</md-icon>
+                </button>
+            </div>
+
+        </md-toolbar>
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+
+</md-sidenav-container>

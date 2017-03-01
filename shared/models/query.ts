@@ -1,3 +1,4 @@
-/**
- * Created by admin on 01/03/2017.
- */
+export interface query {
+
+    query: {}
+}

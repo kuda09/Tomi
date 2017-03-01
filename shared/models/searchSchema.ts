@@ -1,3 +1,7 @@
-/**
- * Created by admin on 01/03/2017.
- */
+import {query} from "./query";
+export interface SearchSchema {
+
+    index: string,
+    type: string
+    body:  query
+}
