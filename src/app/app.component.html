@@ -13,6 +13,10 @@
                 <md-icon md-list-icon>timeline</md-icon>
                 <span md-line>Visualisations</span>
             </a>
+            <a md-list-item (click)="sidenav.close()" [routerLink]="['/settings']">
+                <md-icon md-list-icon>settings</md-icon>
+                <span md-line>Settings</span>
+            </a>
         </md-nav-list>
     </md-sidenav>
 
@@ -23,26 +27,24 @@
             </button>
             <h4>{{title}}</h4>
 
-
             <form class="filter-form">
-
                 <div class="form-wrapper">
                     <input type="text" class="form-control" value="*">
                 </div>
-                <button md-icon-button type="submit">
+                <button md-icon-button type="submit" mdTooltip="Search">
                     <md-icon>search</md-icon>
                 </button>
             </form>
 
 
             <div class="buttons-wrapper">
-                <button md-icon-button>
+                <button md-icon-button mdTooltip="Save dashboard">
                     <md-icon>save</md-icon>
                 </button>
-                <button md-icon-button>
+                <button md-icon-button mdTooltip="Edit Visualisation">
                     <md-icon>create</md-icon>
                 </button>
-                <button md-icon-button>
+                <button md-icon-button mdTooltip="Time picker">
                     <md-icon>timer</md-icon>
                 </button>
             </div>

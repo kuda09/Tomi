@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
@@ -20,7 +20,21 @@ import { AceEditorComponent, AceEditorDirective } from 'ng2-ace-editor';
 
 import { EditVisualisationsComponent } from './visualisations/edit-visualisations/edit-visualisations.component';
 import {HttpService} from "./service/http.service";
-
+import { IndicesComponent } from './settings/indices/indices.component';
+import { StatusComponent } from './settings/status/status.component';
+import { AboutComponent } from './settings/about/about.component';
+import { SettingsComponent } from './settings/settings/settings.component';
+import { AddIndiceComponent } from './settings/indices/add-indice/add-indice.component';
+import {DialogServiceService} from "./service/dialog-service.service";
+import { Angular2DataTableModule } from 'angular2-data-table';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {IndicesEffectsService} from "./effects/indices-effects.service";
+import {StoreModule} from "@ngrx/store";
+import {reducer} from "./reducers/index";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {EffectsModule} from "@ngrx/effects";
+import { IndicePreviewComponent } from './settings/indices/indice-preview/indice-preview.component';
+import { IndiceListComponent } from './settings/indices/indice-list/indice-list.component';
 
 @NgModule({
     declarations: [
@@ -34,20 +48,61 @@ import {HttpService} from "./service/http.service";
         VisualisationsDashboardComponent,
         VisualisationsSidebarComponent,
         DocViewerComponent,
-        EditVisualisationsComponent
+        EditVisualisationsComponent,
+        IndicesComponent,
+        StatusComponent,
+        AboutComponent,
+        SettingsComponent,
+        AddIndiceComponent,
+        IndicePreviewComponent,
+        IndiceListComponent
     ],
     imports: [
         BrowserModule,
+        Angular2DataTableModule,
+        NgxDatatableModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
+        /**
+         * StoreModule.provideStore is imported once in the root module, accepting a reducer
+         * function or object map of reducer functions. If passed an object of
+         * reducers, combineReducers will be run creating your application
+         * meta-reducer. This returns all providers for an @ngrx/store
+         * based application.
+         */
+        StoreModule.provideStore(reducer),
+        /**
+         * Store devtools instrument the store retaining past versions of state
+         * and recalculating new states. This enables powerful time-travel
+         * debugging.
+         *
+         * To use the debugger, install the Redux Devtools extension for either
+         * Chrome or Firefox
+         *
+         * See: https://github.com/zalmoxisus/redux-devtools-extension
+         */
+        StoreDevtoolsModule.instrumentOnlyWithExtension(),
+        /**
+         * EffectsModule.run() sets up the effects class to be initialized
+         * immediately when the application starts.
+         *
+         * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
+         */
+        EffectsModule.run(IndicesEffectsService),
         RouterModule,
         MaterialModule,
         routing,
         FlexLayoutModule
     ],
+    entryComponents: [
+        AddIndiceComponent
+    ],
     providers: [
         appRoutingProviders,
-        HttpService
+        HttpService,
+        IndicesEffectsService,
+        DialogServiceService
     ],
     bootstrap: [AppComponent]
 })
