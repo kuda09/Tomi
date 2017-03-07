@@ -17,15 +17,17 @@ import { VisualisationsDashboardComponent } from './visualisations/visualisation
 import { VisualisationsSidebarComponent } from './visualisations/visualisations-sidebar/visualisations-sidebar.component';
 import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
 import { AceEditorComponent, AceEditorDirective } from 'ng2-ace-editor';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 
 import { EditVisualisationsComponent } from './visualisations/edit-visualisations/edit-visualisations.component';
-import {HttpService} from "./service/http.service";
+import {HttpService} from "./services/http.service";
 import { IndicesComponent } from './settings/indices/indices.component';
 import { StatusComponent } from './settings/status/status.component';
 import { AboutComponent } from './settings/about/about.component';
 import { SettingsComponent } from './settings/settings/settings.component';
 import { AddIndiceComponent } from './settings/indices/add-indice/add-indice.component';
-import {DialogServiceService} from "./service/dialog-service.service";
+import {DialogServiceService} from "./services/dialog-service.service";
 import { Angular2DataTableModule } from 'angular2-data-table';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {IndicesEffectsService} from "./effects/indices-effects.service";
@@ -35,6 +37,11 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {EffectsModule} from "@ngrx/effects";
 import { IndicePreviewComponent } from './settings/indices/indice-preview/indice-preview.component';
 import { IndiceListComponent } from './settings/indices/indice-list/indice-list.component';
+import { LineChartComponent } from './visualisations/vis-types/line-chart/line-chart.component';
+import { BarChartComponent } from './visualisations/vis-types/bar-chart/bar-chart.component';
+import { PieChartComponent } from './visualisations/vis-types/pie-chart/pie-chart.component';
+import { CountComponent } from './visualisations/vis-types/count/count.component';
+import {DragulaModule} from "ng2-dragula";
 
 @NgModule({
     declarations: [
@@ -55,7 +62,11 @@ import { IndiceListComponent } from './settings/indices/indice-list/indice-list.
         SettingsComponent,
         AddIndiceComponent,
         IndicePreviewComponent,
-        IndiceListComponent
+        IndiceListComponent,
+        LineChartComponent,
+        BarChartComponent,
+        PieChartComponent,
+        CountComponent
     ],
     imports: [
         BrowserModule,
@@ -93,10 +104,13 @@ import { IndiceListComponent } from './settings/indices/indice-list/indice-list.
         RouterModule,
         MaterialModule,
         routing,
-        FlexLayoutModule
+        FlexLayoutModule,
+        ChartsModule,
+        DragulaModule
     ],
     entryComponents: [
-        AddIndiceComponent
+        AddIndiceComponent,
+        addDashboardDialog
     ],
     providers: [
         appRoutingProviders,

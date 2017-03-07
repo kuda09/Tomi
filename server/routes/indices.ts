@@ -8,6 +8,7 @@ import * as hapi from "hapi";
 import * as _ from "lodash";
 import {getIndices} from "../controllers/query-es";
 import {indicesSchema} from "../schemas/indicesSchema";
+import {indiceFormatter} from "../formatters/indicesFormatter";
 
 
 export const getIndiceRoute = (server: hapi.Server) => {
@@ -22,7 +23,7 @@ export const getIndiceRoute = (server: hapi.Server) => {
 
                 getIndices(payload)
                     .then(
-                        res => reply(res),
+                        res => reply(indiceFormatter(res)),
                         err => reply(err)
                     )
             },

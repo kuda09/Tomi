@@ -1,13 +1,24 @@
 import * as indice from '../actions/indices';
 /*import * as _ from 'lodash';*/
 
-export interface INDICE_STATE {
-    indices;
+export interface IndiceState {
+    aliases: {};
+    mappings: {};
+    settings: {};
+    warmers: {};
 }
 
-export const  INITIAL_INDICE_STATE:INDICE_STATE = {
-    indices: []
-}
+export interface IndicesState extends Array<IndiceState>{}
+
+
+export const  INITIAL_INDICE_STATE:IndicesState = [
+    {
+        aliases: null,
+        mappings: null,
+        settings: null,
+        warmers: null
+    }
+]
 
 export function indiceReducer(state = INITIAL_INDICE_STATE, action: indice.Actions) : INDICE_STATE {
 
