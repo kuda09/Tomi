@@ -23,7 +23,7 @@ export const getIndiceRoute = (server: hapi.Server) => {
 
                 getIndices(payload)
                     .then(
-                        res => reply(indiceFormatter(res)),
+                        res => reply(_.assign({}, { index: payload.index}, indiceFormatter(res))),
                         err => reply(err)
                     )
             },

@@ -1,31 +1,40 @@
-import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
-import { compose } from '@ngrx/core/compose';
-import { storeFreeze } from 'ngrx-store-freeze';
-import { combineReducers } from '@ngrx/store';
-import {UserState} from "./user";
+import {createSelector} from 'reselect';
+import {ActionReducer} from '@ngrx/store';
+import {compose} from '@ngrx/core/compose';
+import {storeFreeze} from 'ngrx-store-freeze';
+import {combineReducers} from '@ngrx/store';
+import * as  fromUser from "./user";
+import * as fromDashboards from "./dashboards";
+import * as fromVis from "./visualisations";
+import * as fromIndices from "./indices";
 
-
-export interface State {
-    user?: UserState
+export interface ApplicationState {
+    user: fromUser.UserState
 }
 
 const reducers = {
-    indices: fromIndices.indiceReducer,
-    indicesComplete: fromIndicesComplete.indiceCompleteReducer
+    user: fromUser.userReducer,
+    dashboards: fromDashboards.dashboardStateReducer,
+    vis: fromVis.visualisationsStateReducer,
+    indices: fromIndices.indiceReducer
 };
 
+const developmentReducer: ActionReducer<ApplicationState> = compose(storeFreeze, combineReducers)(reducers);
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-
-
-export function reducer (state: any, action: any) {
+export function reducer(state: any, action: any) {
 
     return developmentReducer(state, action);
 }
 
-export const getIndicesState = (state: State) => state.indices;
-export const getIndicesCompleteState = (state: State) => state.indicesComplete;
 
-export const getIndiceEntities = createSelector(getIndicesState, fromIndices.getEntities);
-export const getIndiceCompleteEntities = createSelector(getIndicesCompleteState, fromIndicesComplete.getCompleteEntities);
+export const getUserState = (state: ApplicationState) => state.user;
+export const getIndicesState = (state: ApplicationState) => state.user.indices;
+export const getVisState = (state: ApplicationState) => state.user.visualisations;
+export const getDashboardsState = (state: ApplicationState) => state.user.dashboards;
+
+
+
+export const getUser = createSelector(getUserState, fromUser._getUser);
+export const getIndices = createSelector(getIndicesState, fromIndices._getIndices);
+/*export const getVisualisations = createSelector(getVisState, fromVis._getVis);
+export const getDashboards = createSelector(getDashboardsState, fromDashboards._getDashboards);*/

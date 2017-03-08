@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import * as fromRoot from "./reducers"
 import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {UserState} from "./reducers/user";
 
 
 @Component({
@@ -13,9 +15,11 @@ export class AppComponent implements OnInit{
 
 
   public FilterForm: FormGroup
-  title = 'Virgin Wifi';
+  user$: Observable<UserState>;
 
-  constructor(private _fb: FormBuilder, private store: Store<fromRoot.State>) {
+  constructor(private _fb: FormBuilder, private store: Store<fromRoot.ApplicationState>) {
+
+    this.user$ = store.select(fromRoot.getUser);
 
   }
 
@@ -31,6 +35,5 @@ export class AppComponent implements OnInit{
     if(isValid) {
 
     }
-
   }
 }

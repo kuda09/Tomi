@@ -2,6 +2,7 @@
 import * as hapi from "hapi";
 import {search} from "./searchRoute";
 import {getIndiceRoute} from "./indices";
+import {loginRoute} from "./login";
 
 
 export class Routes {
@@ -14,5 +15,6 @@ export class Routes {
 
         search(this.serverInstance);
         getIndiceRoute(this.serverInstance);
+        loginRoute(this.serverInstance);
     }
 }

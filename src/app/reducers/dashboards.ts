@@ -10,7 +10,7 @@ export interface DashboardState {
 
 export interface DashboardsState extends Array<DashboardState>{}
 
-export const INITIAL_DASHBOARD_STATE: DashboardsState = [{id: null, name: null, visTypes: [], selected: false}];
+export const INITIAL_DASHBOARD_STATE: DashboardsState = [];
 
 export function dashboardStateReducer(state = INITIAL_DASHBOARD_STATE, action: dashboards.Actions): DashboardsState {
 
@@ -67,5 +67,5 @@ export function dashboardStateReducer(state = INITIAL_DASHBOARD_STATE, action: d
     }
 }
 
-export const getDashboards = (state: DashboardState) => state;
+export const _getDashboards = (state: DashboardState) => state;
 

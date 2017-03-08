@@ -18,7 +18,7 @@ import { VisualisationsSidebarComponent } from './visualisations/visualisations-
 import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
 import { AceEditorComponent, AceEditorDirective } from 'ng2-ace-editor';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { EditVisualisationsComponent } from './visualisations/edit-visualisations/edit-visualisations.component';
 import {HttpService} from "./services/http.service";
@@ -31,7 +31,7 @@ import {DialogServiceService} from "./services/dialog-service.service";
 import { Angular2DataTableModule } from 'angular2-data-table';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {IndicesEffectsService} from "./effects/indices-effects.service";
-import {StoreModule} from "@ngrx/store";
+import {StoreModule, combineReducers} from "@ngrx/store";
 import {reducer} from "./reducers/index";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {EffectsModule} from "@ngrx/effects";
@@ -42,6 +42,14 @@ import { BarChartComponent } from './visualisations/vis-types/bar-chart/bar-char
 import { PieChartComponent } from './visualisations/vis-types/pie-chart/pie-chart.component';
 import { CountComponent } from './visualisations/vis-types/count/count.component';
 import {DragulaModule} from "ng2-dragula";
+import {AuthService} from "./services/auth.service";
+import {AuthGuardService} from "./services/auth-guard.service";
+import { LoginComponent } from './home/login/login.component';
+import { LoginDialogComponent } from './home/login/login-dialog/login-dialog.component';
+import {UserEffectsService} from "./effects/user-effects.service";
+import { CheckIndicesComponent } from './home/check-indices/check-indices.component';
+import {LocalStorageService} from "./services/local-storage.service";
+import {compose} from "@ngrx/core";
 
 @NgModule({
     declarations: [
@@ -66,7 +74,10 @@ import {DragulaModule} from "ng2-dragula";
         LineChartComponent,
         BarChartComponent,
         PieChartComponent,
-        CountComponent
+        CountComponent,
+        LoginComponent,
+        LoginDialogComponent,
+        CheckIndicesComponent
     ],
     imports: [
         BrowserModule,
@@ -75,32 +86,10 @@ import {DragulaModule} from "ng2-dragula";
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        /**
-         * StoreModule.provideStore is imported once in the root module, accepting a reducer
-         * function or object map of reducer functions. If passed an object of
-         * reducers, combineReducers will be run creating your application
-         * meta-reducer. This returns all providers for an @ngrx/store
-         * based application.
-         */
         StoreModule.provideStore(reducer),
-        /**
-         * Store devtools instrument the store retaining past versions of state
-         * and recalculating new states. This enables powerful time-travel
-         * debugging.
-         *
-         * To use the debugger, install the Redux Devtools extension for either
-         * Chrome or Firefox
-         *
-         * See: https://github.com/zalmoxisus/redux-devtools-extension
-         */
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
-        /**
-         * EffectsModule.run() sets up the effects class to be initialized
-         * immediately when the application starts.
-         *
-         * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
-         */
         EffectsModule.run(IndicesEffectsService),
+        EffectsModule.run(UserEffectsService),
         RouterModule,
         MaterialModule,
         routing,
@@ -110,11 +99,15 @@ import {DragulaModule} from "ng2-dragula";
     ],
     entryComponents: [
         AddIndiceComponent,
+        LoginDialogComponent,
         addDashboardDialog
     ],
     providers: [
         appRoutingProviders,
         HttpService,
+        AuthService,
+        LocalStorageService,
+        AuthGuardService,
         IndicesEffectsService,
         DialogServiceService
     ],

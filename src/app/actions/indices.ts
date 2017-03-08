@@ -1,41 +1,38 @@
 import { Action } from '@ngrx/store';
 import {type} from "../util";
+import {IndiceState} from "../reducers/indices";
 
 
 export const ActionTypes = {
     ADD_INDICE: type('[Indice] ADD INDICE'),
-    ADD_INDICE_COMPLETE: type('[Indice] ADD INDICE COMPLETE'),
-    SELECT_INDICE: type('[Indice] SELECT'),
+    SELECT_INDICE: type('[Indice] SELECT INDICE'),
     REMOVE_INDICE: type('[Indice] REMOVE INDICE')
 }
 
-export class IndiceAddAction implements Action {
+export class AddIndiceAction implements Action {
 
     type = ActionTypes.ADD_INDICE;
 
-    constructor(public payload: {}[]) {}
+    constructor(public payload: IndiceState) {}
 }
 
-export class AddIndiceCompleteAction implements Action {
+export class RemoveIndiceAction implements Action {
 
-    type = ActionTypes.ADD_INDICE_COMPLETE;
-    constructor(public payload: {}[]){
+    type = ActionTypes.REMOVE_INDICE;
+    constructor(public payload: IndiceState){
 
     }
 
 }
 
-export class IndiceRemoveAction implements Action {
+export class SelectIndiceAction implements Action {
 
-    type = ActionTypes.REMOVE_INDICE;
+    type = ActionTypes.SELECT_INDICE;
 
-    constructor(public payload: string) {}
+    constructor(public payload: IndiceState) {}
 }
 
-/**
- * Export a type alias of all actions in this action group
- * so that reducers can easily compose action types
- */
-export type Actions = IndiceAddAction | IndiceRemoveAction | AddIndiceCompleteAction;
+
+export type Actions = AddIndiceAction | RemoveIndiceAction | SelectIndiceAction;
 
 

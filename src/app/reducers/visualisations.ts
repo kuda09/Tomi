@@ -11,7 +11,7 @@ export interface VisualisationState {
 export interface VisualisationsState extends Array<VisualisationState>{}
 
 
-export const INITIAL_VISUALISATIONS_STATE: VisualisationsState = [{id: null, name: null,  dashboardAssociations: []}];
+export const INITIAL_VISUALISATIONS_STATE: VisualisationsState = [];
 
 
 export function visualisationsStateReducer(state = INITIAL_VISUALISATIONS_STATE, action: visualisation.Actions): VisualisationsState {
@@ -56,3 +56,7 @@ export function visualisationsStateReducer(state = INITIAL_VISUALISATIONS_STATE,
 
     }
 }
+
+
+
+export const _getVis = (state: VisualisationState) => state;
