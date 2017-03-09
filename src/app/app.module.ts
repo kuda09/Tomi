@@ -49,7 +49,8 @@ import { LoginDialogComponent } from './home/login/login-dialog/login-dialog.com
 import {UserEffectsService} from "./effects/user-effects.service";
 import { CheckIndicesComponent } from './home/check-indices/check-indices.component';
 import {LocalStorageService} from "./services/local-storage.service";
-import {compose} from "@ngrx/core";
+import {Ng2PaginationModule} from "ng2-pagination";
+
 
 @NgModule({
     declarations: [
@@ -81,6 +82,7 @@ import {compose} from "@ngrx/core";
     ],
     imports: [
         BrowserModule,
+        Ng2PaginationModule,
         Angular2DataTableModule,
         NgxDatatableModule,
         FormsModule,
