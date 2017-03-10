@@ -25,11 +25,11 @@
             <button md-icon-button (click)="sidenav.open()">
                 <md-icon>menu</md-icon>
             </button>
-            <h4>{{(user$ | async)?.clientName}}</h4>
+            <h4 [routerLink]="['']">{{(user$ | async)?.clientName}}</h4>
 
-            <form class="filter-form" (ngSubmit)="filter(FilterForm.value, FilterForm.valid)" name="FilterForm" [formGroup]="FilterForm">
+            <form class="filter-form" (ngSubmit)="filter(FilterForm.value, FilterForm.valid)" name="FilterForm" [formGroup]="FilterForm" novalidate method="post">
                 <div class="form-wrapper">
-                    <input type="text" class="form-control" value="*" formControlName="params">
+                    <input type="text" class="form-control" value="*" formControlName="query">
                 </div>
                 <button md-icon-button type="submit" mdTooltip="Search">
                     <md-icon>search</md-icon>
@@ -52,7 +52,6 @@
         </md-toolbar>
         <div class="main">
             <router-outlet></router-outlet>
-            <router-outlet name="popup"></router-outlet>
         </div>
 
     </div>

@@ -1,14 +1,8 @@
-/**
- * This function coerces a string into a string literal type.
- * Using tagged union types in TypeScript 2.0, this enables
- * powerful typechecking of our reducers.
- *
- * Since every action label passes through this function it
- * is a good place to ensure all of our action labels
- * are unique.
- */
+import {UserState} from "./store/state/user.state";
+import * as _ from 'lodash';
+import {IndiceState} from "./store/state/indices.state";
 
-let typeCache: { [label: string] : boolean} = {}
+let typeCache: {[label: string]: boolean} = {}
 
 export function type<T>(label: T | ''): T {
 
@@ -20,4 +14,17 @@ export function type<T>(label: T | ''): T {
 
     return <T>label;
 
+}
+
+
+export function getSelectedIndiceIndexAndType(state: UserState) {
+
+    let indices = state.indices;
+
+    let selectedIndice = _.filter(indices, (indice: IndiceState) => indice.selected === true);
+
+    return {
+        index: selectedIndice[0].index,
+        type: Object.keys(selectedIndice[0].mappings)[0]
+    }
 }
