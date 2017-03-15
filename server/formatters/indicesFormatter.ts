@@ -29,7 +29,11 @@ export function indiceFormatter (indices) {
             })
         })
 
-        indiceSessions.mappings[keys[0]] = mappings;
+
+        for(let i = 0; i < keys.length; i++) {
+
+            indiceSessions.mappings[keys[i]] = mappings[0];
+        }
 
         return _.assign({}, _.cloneDeep(acc), _.cloneDeep(indiceSessions));
 

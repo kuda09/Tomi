@@ -5,14 +5,6 @@ export const queryES = (payload, cb) => {
 
     client.search(payload, cb);
 
-
-    client.indices.get({
-        "index": "swarm_sessions"
-    }).then(
-        res => console.log(res),
-        err => console.log(err)
-    );
-
 }
 
 export const pingES = (cb) => {

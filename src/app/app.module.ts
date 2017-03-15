@@ -51,6 +51,19 @@ import { CheckIndicesComponent } from './pages/home/check-indices/check-indices.
 import {LocalStorageService} from "./services/local-storage.service";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {SearchEffectsService} from "./store/effects/search-effects.service";
+import { KeysPipe } from './pipes/keys.pipe';
+import { TimePickerComponent } from './time-picker/time-picker.component';
+import { DatepickerModule } from 'angular2-material-datepicker';
+import {EditDashboardComponent} from "./pages/dashboards/edit-dashboard/edit-dashboard.component";
+import {ViewDashboardComponent} from "./pages/dashboards/view-dashboard/view-dashboard.component";
+import { VisualisationComponent } from './pages/visualisations/visualisation/visualisation.component';
+import { CreateVisualisationComponent } from './pages/visualisations/create-visualisation/create-visualisation.component';
+import { VisEditorSidebarComponent } from './pages/visualisations/create-visualisation/vis-editor-sidebar/vis-editor-sidebar.component';
+import { VisualizeComponent } from './pages/visualisations/create-visualisation/visualize/visualize.component';
+import { VisTypesComponent } from './pages/settings/vis-types/vis-types.component';
+import { AddVisTypeComponent } from './pages/settings/vis-types/add-vis-type/add-vis-type.component';
+import { DataTableComponent } from './pages/visualisations/vis-types/data-table/data-table.component';
+
 
 
 @NgModule({
@@ -79,10 +92,22 @@ import {SearchEffectsService} from "./store/effects/search-effects.service";
         CountComponent,
         LoginComponent,
         LoginDialogComponent,
-        CheckIndicesComponent
+        CheckIndicesComponent,
+        KeysPipe,
+        TimePickerComponent,
+        EditDashboardComponent,
+        ViewDashboardComponent,
+        VisualisationComponent,
+        CreateVisualisationComponent,
+        VisEditorSidebarComponent,
+        VisualizeComponent,
+        VisTypesComponent,
+        AddVisTypeComponent,
+        DataTableComponent,
     ],
     imports: [
         BrowserModule,
+        DatepickerModule,
         Ng2PaginationModule,
         Angular2DataTableModule,
         NgxDatatableModule,
@@ -91,8 +116,6 @@ import {SearchEffectsService} from "./store/effects/search-effects.service";
         HttpModule,
         StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
-        EffectsModule.run(IndicesEffectsService),
-        EffectsModule.run(UserEffectsService),
         EffectsModule.run(SearchEffectsService),
         RouterModule,
         MaterialModule,
@@ -104,7 +127,9 @@ import {SearchEffectsService} from "./store/effects/search-effects.service";
     entryComponents: [
         AddIndiceComponent,
         LoginDialogComponent,
-        addDashboardDialog
+        addDashboardDialog,
+        AddVisTypeComponent,
+        TimePickerComponent
     ],
     providers: [
         appRoutingProviders,
