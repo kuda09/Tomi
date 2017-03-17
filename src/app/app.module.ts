@@ -18,7 +18,6 @@ import { VisualisationsSidebarComponent } from './pages/visualisations/visualisa
 import { DocViewerComponent } from './pages/home/doc-viewer/doc-viewer.component';
 import { AceEditorComponent, AceEditorDirective } from 'ng2-ace-editor';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { EditVisualisationsComponent } from './pages/visualisations/edit-visualisations/edit-visualisations.component';
 import {HttpService} from "./services/http.service";
@@ -63,7 +62,10 @@ import { VisualizeComponent } from './pages/visualisations/create-visualisation/
 import { VisTypesComponent } from './pages/settings/vis-types/vis-types.component';
 import { AddVisTypeComponent } from './pages/settings/vis-types/add-vis-type/add-vis-type.component';
 import { DataTableComponent } from './pages/visualisations/vis-types/data-table/data-table.component';
-
+import { ViewVisualisationComponent } from './pages/visualisations/view-visualisation/view-visualisation.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import {nvD3} from 'ng2-nvd3';
+declare const d3: any;
 
 
 @NgModule({
@@ -75,6 +77,7 @@ import { DataTableComponent } from './pages/visualisations/vis-types/data-table/
         HomeComponent,
         AceEditorComponent,
         AceEditorDirective,
+        nvD3,
         VisualisationsDashboardComponent,
         VisualisationsSidebarComponent,
         DocViewerComponent,
@@ -104,6 +107,8 @@ import { DataTableComponent } from './pages/visualisations/vis-types/data-table/
         VisTypesComponent,
         AddVisTypeComponent,
         DataTableComponent,
+        ViewVisualisationComponent,
+        OrderByPipe,
     ],
     imports: [
         BrowserModule,

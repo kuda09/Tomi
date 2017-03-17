@@ -6,7 +6,7 @@ export interface VisTypeState {
     name: string;
     description: string;
     icon: string;
-    selector: string;
+    selector?: string;
 }
 
 

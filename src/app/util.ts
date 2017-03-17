@@ -62,7 +62,6 @@ export function getDateFields(fields) {
 
     return _.filter(fields, field => field.type === 'date');
 }
-
 export function createQuery(query) {
 
     const buckets = query.buckets;
@@ -79,6 +78,21 @@ export function createQuery(query) {
                 }
             }
         },
+        filter: {
+            bool: {
+                must: [
+                    {
+                        range: {
+                            time_start: {
+                                gte: 1489131326202,
+                                lte: 1489736126203,
+                                format: "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         size: 0,
         aggs: {}
     }
@@ -86,7 +100,12 @@ export function createQuery(query) {
     body.aggs["2"] = {};
     body.aggs["2"][buckets.agg.aggregration] = {};
     body.aggs["2"][buckets.agg.aggregration]['field'] = buckets.agg.field;
+    body.aggs["2"][buckets.agg.aggregration]['time_zone'] = "Europe/London";
     body.aggs["2"][buckets.agg.aggregration]['min_doc_count'] = 1;
+    body.aggs["2"][buckets.agg.aggregration]['extended_bounds'] = {
+        min: 1489131326199,
+        max: 1489736126199,
+    };
     body.aggs["2"][buckets.agg.aggregration]['interval'] = buckets.agg.interval;
 
     return body;
@@ -95,8 +114,30 @@ export function getResultsCount (buckets) {
 
     return _.reduce(buckets, (acc, bucket) => [...acc,bucket.doc_count] ,[]);
 }
-
 export function getLabels (buckets: {}[]): string [] {
 
-    return _.reduce(buckets, (acc, bucket) => [...acc,(bucket.from_as_string + ' - to - ' + bucket.to_as_string)] ,[]);
+    return _.reduce(buckets, (acc, bucket) => {
+
+        return [...acc,(formatDailyDate(bucket.key_as_string))];
+    },[]);
+}
+export function formatDailyDate(date) {
+
+    return moment(date).format('MMMM Do YYYY');
+}
+export function convertBucketsToLabelsAndValues(buckets) {
+
+    return _.reduce(buckets, (acc, bucket) => {
+
+        const _bucket = _.assign({}, {
+            label: formatDailyDate(bucket.key_as_string),
+            value: bucket.doc_count
+        });
+        return [...acc, _bucket];
+    },[]);
+}
+
+export function chartTypeOptions(){
+
+
 }
