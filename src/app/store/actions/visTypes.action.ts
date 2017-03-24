@@ -5,6 +5,7 @@ import {VisTypeState} from "../state/visTypes.state";
 export const ActionTypes = {
     INSTALL_VIS: type('[VisType] INSTALL VIS'),
     UNINSTALL_VIS: type('[VisType] UNINSTALL VIS'),
+    EDIT_VIS: type('[VisType] EDIT VIS'),
 }
 
 export class InstallVisAction implements Action {
@@ -16,6 +17,7 @@ export class InstallVisAction implements Action {
     }
 }
 
+
 export class UnistallVisAction implements Action {
 
     type = ActionTypes.UNINSTALL_VIS;
@@ -25,5 +27,14 @@ export class UnistallVisAction implements Action {
     }
 }
 
+export class EditVisAction implements Action {
 
-export type Actions = InstallVisAction | UnistallVisAction;
+    type = ActionTypes.EDIT_VIS;
+
+    constructor(public payload: VisTypeState){
+
+    }
+}
+
+
+export type Actions = InstallVisAction | UnistallVisAction | EditVisAction;

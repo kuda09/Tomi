@@ -13,13 +13,11 @@ import { DashboardsComponent } from './pages/dashboards/dashboards.component';
 import { VisualisationsComponent } from './pages/visualisations/visualisations.component';
 import { HomeComponent } from './pages/home/home.component';
 import {addDashboardDialog} from "./pages/dashboards/addDashboard/add.dashboard.component";
-import { VisualisationsDashboardComponent } from './pages/visualisations/visualisations-dashboard/visualisations-dashboard.component';
-import { VisualisationsSidebarComponent } from './pages/visualisations/visualisations-sidebar/visualisations-sidebar.component';
+import { VisualisationsSidebarComponent } from './pages/visualisations/visualisation/visualisations-sidebar/visualisations-sidebar.component';
 import { DocViewerComponent } from './pages/home/doc-viewer/doc-viewer.component';
 import { AceEditorComponent, AceEditorDirective } from 'ng2-ace-editor';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
-import { EditVisualisationsComponent } from './pages/visualisations/edit-visualisations/edit-visualisations.component';
 import {HttpService} from "./services/http.service";
 import { IndicesComponent } from './pages/settings/indices/indices.component';
 import { StatusComponent } from './pages/settings/status/status.component';
@@ -57,14 +55,17 @@ import {EditDashboardComponent} from "./pages/dashboards/edit-dashboard/edit-das
 import {ViewDashboardComponent} from "./pages/dashboards/view-dashboard/view-dashboard.component";
 import { VisualisationComponent } from './pages/visualisations/visualisation/visualisation.component';
 import { CreateVisualisationComponent } from './pages/visualisations/create-visualisation/create-visualisation.component';
-import { VisEditorSidebarComponent } from './pages/visualisations/create-visualisation/vis-editor-sidebar/vis-editor-sidebar.component';
-import { VisualizeComponent } from './pages/visualisations/create-visualisation/visualize/visualize.component';
+import { VisEditorSidebarComponent } from './pages/visualisations/visualisation/vis-editor-sidebar/vis-editor-sidebar.component';
+import { VisualizeComponent } from './pages/visualisations/visualisation/visualize/visualize.component';
 import { VisTypesComponent } from './pages/settings/vis-types/vis-types.component';
 import { AddVisTypeComponent } from './pages/settings/vis-types/add-vis-type/add-vis-type.component';
 import { DataTableComponent } from './pages/visualisations/vis-types/data-table/data-table.component';
-import { ViewVisualisationComponent } from './pages/visualisations/view-visualisation/view-visualisation.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import {nvD3} from 'ng2-nvd3';
+import { EditVisTypeComponent } from './pages/settings/vis-types/edit-vis-type/edit-vis-type.component';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {VisTypesEffectsService} from "./store/effects/vis-types-effects.service";
+import {VisualisationsEffectsService} from "./store/effects/visualisations-effects.service";
 declare const d3: any;
 
 
@@ -78,10 +79,8 @@ declare const d3: any;
         AceEditorComponent,
         AceEditorDirective,
         nvD3,
-        VisualisationsDashboardComponent,
         VisualisationsSidebarComponent,
         DocViewerComponent,
-        EditVisualisationsComponent,
         IndicesComponent,
         StatusComponent,
         AboutComponent,
@@ -107,8 +106,8 @@ declare const d3: any;
         VisTypesComponent,
         AddVisTypeComponent,
         DataTableComponent,
-        ViewVisualisationComponent,
         OrderByPipe,
+        EditVisTypeComponent,
     ],
     imports: [
         BrowserModule,
@@ -122,11 +121,14 @@ declare const d3: any;
         StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
         EffectsModule.run(SearchEffectsService),
+        EffectsModule.run(VisualisationsEffectsService),
+        EffectsModule.run(VisTypesEffectsService),
         RouterModule,
         MaterialModule,
         routing,
         FlexLayoutModule,
         ChartsModule,
+        Ng2SearchPipeModule,
         DragulaModule
     ],
     entryComponents: [

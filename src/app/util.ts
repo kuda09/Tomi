@@ -4,6 +4,8 @@ import {IndiceState} from "./store/state/indices.state";
 import * as moment from 'moment';
 import * as uuid from 'uuid';
 
+
+
 const bodyBuilder = require('bodybuilder');
 
 let typeCache: {[label: string]: boolean} = {}
@@ -62,54 +64,6 @@ export function getDateFields(fields) {
 
     return _.filter(fields, field => field.type === 'date');
 }
-export function createQuery(query) {
-
-    const buckets = query.buckets;
-    const metrics = query.metrics;
-
-    let body =  {
-        query: {
-            filtered: {
-                query: {
-                    query_string: {
-                        query: '*',
-                        analyze_wildcard: true
-                    }
-                }
-            }
-        },
-        filter: {
-            bool: {
-                must: [
-                    {
-                        range: {
-                            time_start: {
-                                gte: 1489131326202,
-                                lte: 1489736126203,
-                                format: "epoch_millis"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        size: 0,
-        aggs: {}
-    }
-
-    body.aggs["2"] = {};
-    body.aggs["2"][buckets.agg.aggregration] = {};
-    body.aggs["2"][buckets.agg.aggregration]['field'] = buckets.agg.field;
-    body.aggs["2"][buckets.agg.aggregration]['time_zone'] = "Europe/London";
-    body.aggs["2"][buckets.agg.aggregration]['min_doc_count'] = 1;
-    body.aggs["2"][buckets.agg.aggregration]['extended_bounds'] = {
-        min: 1489131326199,
-        max: 1489736126199,
-    };
-    body.aggs["2"][buckets.agg.aggregration]['interval'] = buckets.agg.interval;
-
-    return body;
-}
 export function getResultsCount (buckets) {
 
     return _.reduce(buckets, (acc, bucket) => [...acc,bucket.doc_count] ,[]);
@@ -133,11 +87,41 @@ export function convertBucketsToLabelsAndValues(buckets) {
             label: formatDailyDate(bucket.key_as_string),
             value: bucket.doc_count
         });
+
+
         return [...acc, _bucket];
     },[]);
 }
+export function convertBucketsToXsAndYs(buckets) {
 
-export function chartTypeOptions(){
+    return _.reduce(buckets, (acc, bucket, index) => {
+
+        const _bucket = _.assign({}, {
+            x: index,
+            y: bucket.doc_count
+        });
+
+
+        return [...acc, _bucket];
+    },[]);
+}
+export function chartType(type){
 
 
 }
+function isPieChart(type) {
+
+
+    return
+}
+
+export function isFieldDefined(obj?, field?){
+
+    if(obj['agg'][field] !== undefined) {
+
+        return obj['agg'][field] ;
+    }
+
+    return '';
+}
+

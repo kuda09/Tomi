@@ -40,6 +40,26 @@ export function visTypesStateReducer(state = INITIAL_VISTYPES_STATE, action: Act
             return newState;
         }
 
+        case ActionTypes.EDIT_VIS: {
+
+            const _vis = action.payload;
+            const _visId = action.payload.id;
+
+            const newState = _.map(state, (vis: VisTypeState) => {
+
+                if(vis.id === _visId) {
+
+                    vis = _vis
+                }
+
+                return vis;
+            });
+
+            saveToLocalStorage(newState);
+
+            return  newState;
+        }
+
 
         default: {
 

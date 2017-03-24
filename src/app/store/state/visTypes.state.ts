@@ -7,6 +7,7 @@ export interface VisTypeState {
     description: string;
     icon: string;
     selector?: string;
+    options?:{};
 }
 
 
