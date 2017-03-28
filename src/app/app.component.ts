@@ -41,10 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
             .aggregation('terms', 'user')
             .build('v1')
 
-        this.user$
-            .subscribe((userState: UserState) => {
-                this.type = getSelectedIndiceIndexAndType(userState);
-            });
+        /*this.user$
+            .subscribe((applicationState) => {
+                this.type = getSelectedIndiceIndexAndType(applicationState);
+            });*/
 
     }
 

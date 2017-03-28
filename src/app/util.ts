@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import {IndiceState} from "./store/state/indices.state";
 import * as moment from 'moment';
 import * as uuid from 'uuid';
+import {ApplicationState} from "./store/state/application.state";
 
 
 
@@ -21,7 +22,7 @@ export function type<T>(label: T | ''): T {
     return <T>label;
 
 }
-export function getSelectedIndiceIndexAndType(state: UserState) {
+export function getSelectedIndiceIndexAndType(state: ApplicationState) {
 
     let indices = state.indices;
 
