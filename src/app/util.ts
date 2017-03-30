@@ -78,7 +78,7 @@ export function getLabels (buckets: {}[]): string [] {
 }
 export function formatDailyDate(date) {
 
-    return moment(date).format('MMMM Do YYYY');
+    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
 }
 export function convertBucketsToLabelsAndValues(buckets) {
 

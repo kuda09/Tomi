@@ -12,9 +12,18 @@ import {Routes} from "./routes/index";
 env.config();
 const server: hapi.Server = new hapi.Server();
 server.connection({port: process.env.API_PORT, host: process.env.ES_HOST});
-const routes = new Routes(server);
-routes.init();
-server.start(err => {
-    if (err) throw err;
-    console.log(`Server up and running at:${server.info.uri}`);
+server.register(require('inert'), (err) => {
+
+    if(err) {
+
+        throw err;
+    }
+
+    const routes = new Routes(server);
+    routes.init();
+    server.start(err => {
+        if (err) throw err;
+        console.log(`Server up and running at:${server.info.uri}`);
+    })
+
 })
