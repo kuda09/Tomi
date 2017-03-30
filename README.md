@@ -5,6 +5,10 @@ A reporting platform for Elastic Search
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## API Server 
+Run `npm api-server` this will start the api server on the defined port in the environment config file 
+
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
