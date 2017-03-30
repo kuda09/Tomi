@@ -11,10 +11,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-## Install Types
-`typings install <node-package-name> --save`. This will install all the types in the typings from 
-
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Install Types
+`typings install <node-package-name> --save`. This will install all the types in the typings fold 
 
 ## Running unit tests
 
