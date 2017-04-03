@@ -1,4 +1,4 @@
-import {client} from "./../config/connections";
+import {client} from "../../connections/elastic-search.connection";
 
 
 export const queryES = (payload, cb) => {

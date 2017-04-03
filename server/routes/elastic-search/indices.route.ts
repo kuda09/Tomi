@@ -1,17 +1,14 @@
-///<reference path="../../node_modules/@types/hapi/index.d.ts"/>
-///<reference path="../../typings/modules/lodash/index.d.ts"/>
-
-
-
+///<reference path="../../../node_modules/@types/hapi/index.d.ts"/>
+///<reference path="../../../typings/modules/lodash/index.d.ts"/>
 
 import * as hapi from "hapi";
 import * as _ from "lodash";
-import {getIndices} from "../controllers/query-es";
-import {indicesSchema} from "../schemas/indicesSchema";
-import {indiceFormatter} from "../formatters/indicesFormatter";
+import {getIndices} from "../../controllers/elastic-search/query-es.controller";
+import {indicesSchema} from "../../schemas/indices.schema";
+import {indiceFormatter} from "../../formatters/indices.formatter";
 
 
-export const getIndiceRoute = (server: hapi.Server) => {
+export const indicesRouter = (server: hapi.Server) => {
 
     server.route({
         method: "POST",

@@ -1,11 +1,8 @@
-import {UserState} from "./store/state/user.state";
 import * as _ from 'lodash';
 import {IndiceState} from "./store/state/indices.state";
 import * as moment from 'moment';
 import * as uuid from 'uuid';
 import {ApplicationState} from "./store/state/application.state";
-
-
 
 const bodyBuilder = require('bodybuilder');
 
@@ -47,31 +44,31 @@ export function getSelectedIndex(indices) {
 export function generateUniqueId() {
     return uuid.v1();
 }
-export function getListOfFieldNames(indice) {
+export function getListOfFieldNames(indice: any) {
 
-    return _.reduce(_.values(indice.mappings), (acc, mapping) => {
+    return _.reduce(_.values(indice.mappings), (acc, mapping: any) => {
         return mapping;
     }, [])
 }
-export function getNumberFields(fields) {
+export function getNumberFields(fields: any) {
 
-    return _.filter(fields, field => field.type === 'long');
+    return _.filter(fields, (field: any) => field.type === 'long');
 }
 export function getStringFields(fields) {
 
-    return _.filter(fields, field => field.type === 'string');
+    return _.filter(fields, (field: any) => field.type === 'string');
 }
-export function getDateFields(fields) {
+export function getDateFields(fields: any) {
 
-    return _.filter(fields, field => field.type === 'date');
+    return _.filter(fields, (field:any) => field.type === 'date');
 }
 export function getResultsCount (buckets) {
 
-    return _.reduce(buckets, (acc, bucket) => [...acc,bucket.doc_count] ,[]);
+    return _.reduce(buckets, (acc, bucket: any) => [...acc,bucket.doc_count] ,[]);
 }
 export function getLabels (buckets: {}[]): string [] {
 
-    return _.reduce(buckets, (acc, bucket) => {
+    return _.reduce(buckets, (acc, bucket: any) => {
 
         return [...acc,(formatDailyDate(bucket.key_as_string))];
     },[]);
@@ -82,7 +79,7 @@ export function formatDailyDate(date) {
 }
 export function convertBucketsToLabelsAndValues(buckets) {
 
-    return _.reduce(buckets, (acc, bucket) => {
+    return _.reduce(buckets, (acc, bucket: any) => {
 
         const _bucket = _.assign({}, {
             label: formatDailyDate(bucket.key_as_string),
@@ -95,7 +92,7 @@ export function convertBucketsToLabelsAndValues(buckets) {
 }
 export function convertBucketsToXsAndYs(buckets) {
 
-    return _.reduce(buckets, (acc, bucket, index) => {
+    return _.reduce(buckets, (acc, bucket: any, index) => {
 
         const _bucket = _.assign({}, {
             x: index,
@@ -113,7 +110,7 @@ export function chartType(type){
 function isPieChart(type) {
 
 
-    return
+    return null;
 }
 
 export function isFieldDefined(obj?, field?){

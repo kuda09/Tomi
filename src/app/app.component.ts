@@ -5,7 +5,7 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {ApplicationState} from "./store/state/application.state";
 import {UserState} from "./store/state/user.state";
-import {RetrieveUserAction} from "./store/actions/user.action";
+import {LoginFailedAction} from "./store/actions/user.action";
 import {getSelectedIndiceIndexAndType} from "./util";
 import {NewSearchAction} from "./store/actions/search.action";
 import {MdDialog} from "@angular/material";

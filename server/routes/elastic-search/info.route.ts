@@ -1,16 +1,16 @@
-///<reference path="../../node_modules/@types/hapi/index.d.ts"/>
+///<reference path="../../../node_modules/@types/hapi/index.d.ts"/>
 
 
 import * as hapi from "hapi";
-import {searchSchema} from "../schemas/searchSchema";
-import {queryES} from "../controllers/query-es";
+import {searchSchema} from "../../schemas/search.schema";
+import {queryES} from "../../controllers/elastic-search/query-es.controller";
 
 
 export const search = (server: hapi.Server) => {
 
     server.route({
         method: "POST",
-        path: "/api/search",
+        path: "/api/indicesRouter",
         config: {
             handler: (request: hapi.Request, reply: hapi.IReply) => {
 

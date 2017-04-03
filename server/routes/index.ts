@@ -1,9 +1,11 @@
 ///<reference path="../../node_modules/@types/hapi/index.d.ts"/>
 import * as hapi from "hapi";
-import {search} from "./searchRoute";
-import {getIndiceRoute} from "./indices";
-import {loginRoute} from "./login";
-import {homeRouter} from "./homeRoute";
+import {searchRouter} from "./elastic-search/search.route";
+import {indicesRouter} from "./elastic-search/indices.route";
+import {loginRouter} from "./auth/login.route";
+import {homeRouter} from "./home.route";
+import {registerRouter} from "./auth/register.route";
+import {dashBoardsRouter} from "./collections/dashboards.route";
 
 
 export class Routes {
@@ -14,9 +16,12 @@ export class Routes {
 
     init() {
 
-        search(this.serverInstance);
-        getIndiceRoute(this.serverInstance);
-        loginRoute(this.serverInstance);
+        searchRouter(this.serverInstance);
+        indicesRouter(this.serverInstance);
+        loginRouter(this.serverInstance);
+        registerRouter(this.serverInstance)
         homeRouter(this.serverInstance);
+        dashBoardsRouter(this.serverInstance);
+
     }
 }

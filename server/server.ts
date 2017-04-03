@@ -8,22 +8,33 @@
 import * as hapi from "hapi";
 import * as env from "dotenv";
 import {Routes} from "./routes/index";
+import {connectToDatabase} from "./connections/db.connection";
 
 env.config();
-const server: hapi.Server = new hapi.Server();
-server.connection({port: process.env.API_PORT, host: process.env.ES_HOST});
-server.register(require('inert'), (err) => {
+connectToDatabase((err) => {
 
     if(err) {
-
-        throw err;
+        console.log(`Failed to connect to the database`);
+        return;
     }
 
-    const routes = new Routes(server);
-    routes.init();
-    server.start(err => {
-        if (err) throw err;
-        console.log(`Server up and running at:${server.info.uri}`);
+    const server: hapi.Server = new hapi.Server();
+    server.connection({port: process.env.API_PORT, host: process.env.ES_HOST});
+    server.register(require('inert'), (err) => {
+
+        if(err) {
+
+            throw err;
+        }
+
+        new Routes(server).init();
+
+        server.start(err => {
+            if (err) throw err;
+            console.log(`Server up and running at:${server.info.uri}`);
+        })
+
     })
 
-})
+});
+

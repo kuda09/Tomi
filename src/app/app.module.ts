@@ -128,7 +128,6 @@ declare const d3: any;
         routing,
         FlexLayoutModule,
         ChartsModule,
-        Ng2SearchPipeModule,
         DragulaModule
     ],
     entryComponents: [

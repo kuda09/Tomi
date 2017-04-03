@@ -5,16 +5,16 @@ import * as _ from "lodash";
 
 export function indiceFormatter (indices) {
 
-    return _.reduce(_.values(indices), function (acc, indiceSessions) {
+    return _.reduce(_.values(indices), function (acc, indiceSessions: any) {
 
         const keys = _.keys(indiceSessions.mappings);
 
-        const mappings = _.map(_.values(indiceSessions.mappings), function (type) {
+        const mappings = _.map(_.values(indiceSessions.mappings), function (type: any) {
 
             const name = _.keys(type.properties);
             const values = _.values(type.properties);
 
-            return _.map(values, function (value, index) {
+            return _.map(values, function (value: any, index) {
 
                 for(var i = 0; i < name.length; i++) {
 

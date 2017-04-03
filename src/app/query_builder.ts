@@ -74,7 +74,7 @@ export class QueryBuilder {
 
         if(buckets.length > 0) {
 
-            this.query.aggs = _.assign({}, _.reduce(buckets, (acc, bucket, index) => {
+            this.query.aggs = _.assign({}, _.reduce(buckets, (acc, bucket: any, index) => {
                 let agg = {};
                 agg[bucket.agg.aggregration] = {};
                 agg[bucket.agg.aggregration]["field"] = bucket.agg.field;
