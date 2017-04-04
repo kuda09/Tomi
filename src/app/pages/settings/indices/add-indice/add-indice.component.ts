@@ -17,6 +17,7 @@ export class AddIndiceComponent implements OnInit {
 
   public IndicesForm: FormGroup;
   loading$: Observable<boolean>;
+  errorMessage: string;
 
   constructor(
       private _fb: FormBuilder,
@@ -39,9 +40,11 @@ export class AddIndiceComponent implements OnInit {
 
     if(isValid) {
 
+      this.errorMessage = undefined;
       this.httpService.retrieveIndices(payload)
           .subscribe(
-              indice => this.store.dispatch(new AddIndiceAction(indice))
+              indice => this.store.dispatch(new AddIndiceAction(indice)),
+              err => this.errorMessage = err
           )
     }
   }

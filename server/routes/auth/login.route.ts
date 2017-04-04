@@ -1,6 +1,7 @@
 ///<reference path="../../../node_modules/@types/hapi/index.d.ts"/>
 ///<reference path="../../../typings/modules/lodash/index.d.ts"/>
 import * as hapi from "hapi";
+import * as _ from "lodash";
 import {loginSchema} from "../../schemas/login.schema";
 import {validate} from "../../controllers/strategies/auth.basic";
 const BASIC = require("hapi-auth-basic");
@@ -13,7 +14,7 @@ export const loginRouter = (server: hapi.Server) => {
 
         server.auth.strategy('simple', 'basic', { validateFunc: validate})
         server.route({
-            method: "POST",
+            method: "GET",
             path: "/api/login",
             config: {
                 auth: 'simple',
@@ -23,7 +24,7 @@ export const loginRouter = (server: hapi.Server) => {
 
                     if(request.auth.isAuthenticated) {
 
-                        const USER = Object.assign({}, {
+                        const USER = _.assign({}, {
                             token: authCredentials.token,
                             username: authCredentials.username,
                             name: authCredentials.name,
@@ -36,9 +37,6 @@ export const loginRouter = (server: hapi.Server) => {
                         reply({payload: USER});
                     }
 
-                },
-                validate: {
-                    payload: loginSchema
                 }
             }
         });

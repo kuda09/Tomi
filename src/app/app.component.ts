@@ -5,14 +5,11 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {ApplicationState} from "./store/state/application.state";
 import {UserState} from "./store/state/user.state";
-import {LoginFailedAction} from "./store/actions/user.action";
-import {getSelectedIndiceIndexAndType} from "./util";
 import {NewSearchAction} from "./store/actions/search.action";
 import {MdDialog} from "@angular/material";
 import {TimePickerComponent} from "./time-picker/time-picker.component";
 import 'rxjs/add/operator/take';
-
-const bb = require("bodybuilder");
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -27,24 +24,11 @@ export class AppComponent implements OnInit, OnDestroy {
     type;
 
     constructor(private _fb: FormBuilder,
+                private router: Router,
                 private store: Store<ApplicationState>,
                 private dialog: MdDialog) {
 
         this.user$ = store.select(fromRoot.getUser);
-
-        const body = bb()
-            .query('match', 'message', 'this is a test')
-            .filter('term', 'user', 'kimchy')
-            .filter('term', 'user', 'herald')
-            .orFilter('term', 'user', 'johnny')
-            .notFilter('term', 'user', 'cassie')
-            .aggregation('terms', 'user')
-            .build('v1')
-
-        /*this.user$
-            .subscribe((applicationState) => {
-                this.type = getSelectedIndiceIndexAndType(applicationState);
-            });*/
 
     }
 
@@ -52,7 +36,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.FilterForm = this._fb.group({
             query: ['*', Validators.required]
-        })
+        });
+        //this.router.navigate([{outlets: {popup: 'login'}}]);
+
     }
 
     ngOnDestroy() {

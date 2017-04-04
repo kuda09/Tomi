@@ -7,7 +7,7 @@ export const queryES = (payload, cb) => {
 
 }
 
-export const pingES = (cb) => {
+export const pingElasticSearch = (cb) => {
 
     client.ping({requestTimeout: Infinity}, cb)
 }

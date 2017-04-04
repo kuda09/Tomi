@@ -12,8 +12,9 @@ export const indicesRouter = (server: hapi.Server) => {
 
     server.route({
         method: "POST",
-        path: "/api/indices",
+        path: "/api/elasticsearch/indices",
         config: {
+            auth: false,
             handler: (request: hapi.Request, reply: hapi.IReply) => {
 
                 const payload = request.payload.payload;

@@ -13,22 +13,23 @@ import 'rxjs/add/operator/takeUntil';
 import * as _ from 'lodash';
 
 import {HttpService} from "../../services/http.service";
+import {ActionTypes, AddIndiceAction} from "../actions/indices.action";
 @Injectable()
 export class IndicesEffectsService {
 
   constructor(private action$: Actions, private httpService: HttpService) { }
 
 
-  /*@Effect()
+  @Effect()
   retrieveIndices$: Observable<Action> = this.action$
-      .ofType(indice.ActionTypes.ADD_INDICE)
+      .ofType(ActionTypes.ADD_INDICE)
       .map(toPayload)
       .switchMap(payload => {
         return this.httpService.retrieveIndices(payload)
             .map(indices => {
 
-                return new indice.AddIndiceAction(indices)
+                return new AddIndiceAction(indices)
             });
-      })*/
+      })
 
 }

@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, Http, RequestOptions} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import 'hammerjs';
@@ -39,7 +39,7 @@ import { BarChartComponent } from './pages/visualisations/vis-types/bar-chart/ba
 import { PieChartComponent } from './pages/visualisations/vis-types/pie-chart/pie-chart.component';
 import { CountComponent } from './pages/visualisations/vis-types/count/count.component';
 import {DragulaModule} from "ng2-dragula";
-import {AuthService} from "./services/auth.service";
+import {AuthService, AuthHttpServiceFactory} from "./services/auth.service";
 import {AuthGuardService} from "./services/auth-guard.service";
 import { LoginComponent } from './pages/home/login/login.component';
 import { LoginDialogComponent } from './pages/home/login/login-dialog/login-dialog.component';
@@ -66,6 +66,7 @@ import { EditVisTypeComponent } from './pages/settings/vis-types/edit-vis-type/e
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {VisTypesEffectsService} from "./store/effects/vis-types-effects.service";
 import {VisualisationsEffectsService} from "./store/effects/visualisations-effects.service";
+import {AuthHttp} from "angular2-jwt";
 declare const d3: any;
 
 
@@ -121,7 +122,9 @@ declare const d3: any;
         StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
         EffectsModule.run(SearchEffectsService),
+        EffectsModule.run(IndicesEffectsService),
         EffectsModule.run(VisualisationsEffectsService),
+        EffectsModule.run(UserEffectsService),
         EffectsModule.run(VisTypesEffectsService),
         RouterModule,
         MaterialModule,
@@ -141,6 +144,11 @@ declare const d3: any;
         appRoutingProviders,
         HttpService,
         AuthService,
+        {
+            provide: AuthHttp,
+            useFactory: AuthHttpServiceFactory,
+            deps: [Http, RequestOptions]
+        },
         LocalStorageService,
         AuthGuardService,
         IndicesEffectsService,

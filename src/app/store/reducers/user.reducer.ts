@@ -23,7 +23,7 @@ export function userReducer(state = INITIAL_USER_STATE, action: Actions) : UserS
         }
         case ActionTypes.LOGIN_SUCCESS: {
 
-            const newState = Object.assign({}, _user);
+            const newState = Object.assign({}, _user.payload);
             //side effects but oh well
             localStorage.setItem('USER_STATE', newState);
 
