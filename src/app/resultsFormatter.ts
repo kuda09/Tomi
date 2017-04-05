@@ -23,7 +23,9 @@ export class ResultsFormatter {
             return [results.hits.hits.total];
         }
 
-        return _.reduce(_.values(results.aggregations), (acc, aggregration) => [...acc, aggregration], []);
+        const aggregrations = _.values(results.aggregations);
+
+        return _.reduce(aggregrations, (acc, aggregration) => [...acc, aggregration], []);
 
     }
 
