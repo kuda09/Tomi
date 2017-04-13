@@ -10,10 +10,6 @@ import * as fromVisTypes from "./visTypes.reducer";
 import * as fromIndices from "./indices.reducer";
 import * as fromSearches from "./search.reducer";
 import {ApplicationState} from "../state/application.state";
-import {VisualisationState, VisualisationsState} from "../state/vis.state";
-import {DashboardState} from "../state/dashboards.state";
-import {UserState} from "../state/user.state";
-
 
 const reducers = {
     user: fromUser.userReducer,
@@ -40,7 +36,6 @@ export const getDashboardsState = (state: ApplicationState) => state.dashboards;
 
 
 export const getUser = createSelector(getUserState, fromUser._getUser);
-
-//export const getIndices = createSelector(getUserState, fromIndices._getIndices);
+export const getIndices = createSelector(getIndicesState, fromIndices._getIndices);
 export const getVisualisations = createSelector(getVisState, fromVis._getVis);
 export const getDashboards = createSelector(getDashboardsState, fromDashboards._getDashboards);

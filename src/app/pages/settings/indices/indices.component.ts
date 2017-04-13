@@ -31,7 +31,7 @@ export class IndicesComponent implements OnInit, OnDestroy {
 
     }
 
-    addIndice() {
+    addIndice(): void {
         this.dialog.open(AddIndiceComponent);
     }
 
